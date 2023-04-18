@@ -16,7 +16,24 @@
   let error = null;
 
   let parsed = {};
+  let flattenedData = {};
   let rendered = {};
+
+  const flattenKeys = (data) => {
+    let flattened = {};
+    Object.keys(data).forEach((key) => {
+      const value = data[key];
+      flattened[key] = value;
+      if (value.type === 'array') {
+        const firstItem = value.value[0];
+        flattened = {
+          ...flattened,
+          ...flattenKeys(firstItem)
+        }
+      }
+    });
+    return flattened;
+  }
 
   const updateInputHtml = (event) => {
     inputHtml = event.detail.code;
@@ -50,6 +67,9 @@
     error = null;
     const el = fragment.children[0];
     parsed = componentMigrator.parseComponent(el);
+    
+
+    flattenedData = flattenKeys(parsed.data);
     rerunTemplateEngine();
 
     inputKeys = Object.keys(rendered.keyToIdLookup).map((key) => {
@@ -58,8 +78,20 @@
     });
   }
 
+  const formatLabel = (data) => {
+    let value = data.value;
+    if (data.type === 'array') {
+      value = '[]';
+    }
+    let label = data.type
+    if (data.element) {
+      label = `${data.element}[${data.attribute}]`;
+    }
+    return `${label}:  ${value}`
+  }
+
   const generateKeyLookup = () => {
-    const dataKeys = Object.keys(parsed.data);
+    const dataKeys = Object.keys(flattenedData);
     const keyLookup = {};
 
     for (let i = 0; i < dataKeys.length; i++) {
@@ -128,11 +160,11 @@
         value={inputLabel}
         label={'Component Name'}
         on:change={(e) => updateLabel(e.detail.key)} />
-      {#each Object.keys(parsed.data || {}) as key, index}
+      {#each Object.keys(flattenedData || {}) as key, index}
         <KeyEditor
           key={key}
           value={inputKeys[index]}
-          label={`${parsed.data[key].type}: ${parsed.data[key].value}`}
+          label={formatLabel(flattenedData[key])}
           on:change={(e) => updateInputKey(e.detail.key, index)} />
       {/each}
     </div>
