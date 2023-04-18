@@ -1,4 +1,6 @@
-# Collage
+# Bookshop Component Migrator Frontend
+
+Try it out at https://sunset-sandpaper.cloudvent.net/
 
 ```bash
 # Run locally
@@ -8,4 +10,3 @@ npm run dev
 npm run build
 ```
 
-A quick POC of a snippet debugger for the CloudCannon scrap-booker. Make sure you're [authenticated with GitHub packages](https://office.cloudcannon.com/development/completing-the-setup/#authenticating-github-packages) when running locally.
