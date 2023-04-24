@@ -65,6 +65,8 @@ main {
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  position: relative;
+
 }
 
 @media (max-width: 800px) {
@@ -110,4 +112,58 @@ main {
   text-transform: uppercase;
   line-height: 1em;
   padding: 5px 0;
+}
+
+
+.copy-code-wrap {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+
+}
+
+
+
+.copy-code-wrap:is(:hover, :focus, :active) {
+  box-shadow: none;
+}
+
+.copy-code {
+	height: 26px;
+	width: 26px;
+	position: absolute;
+  top: 1px;
+  right: 1px;
+	background: #339af0;
+	border-radius: 50%;
+  border-color: transparent;
+	z-index: 10;
+	transition: 0.2s;
+}
+
+
+
+.copy-code::after {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 600;
+	font-size: 14px;
+	content: "\f328";
+	color: #fff;
+	position: absolute; 
+	top: 5px;
+	left: 8px;
+}
+.copy-code-wrap:active .copy-code {
+	transform: translate(0, 0) scale(0.9);
+}
+.animate {
+	transform: translate(0, 0) scale(1.12);
 }
