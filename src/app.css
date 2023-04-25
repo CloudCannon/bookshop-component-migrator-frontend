@@ -115,7 +115,9 @@ main {
 }
 
 
-.copy-code-wrap {
+
+
+.copy-btn {
     height: 28px;
     width: 28px;
     position: absolute;
@@ -127,43 +129,43 @@ main {
     padding: 0;
     margin: 0;
     background-color: transparent;
-
 }
 
 
-
-.copy-code-wrap:is(:hover, :focus, :active) {
+.copy-btn:is(:hover, :focus, :active) {
   box-shadow: none;
+  background-color: transparent;
 }
 
-.copy-code {
+.copy-icon {
 	height: 26px;
 	width: 26px;
 	position: absolute;
   top: 1px;
   right: 1px;
-	background: #339af0;
-	border-radius: 50%;
-  border-color: transparent;
-	z-index: 10;
 	transition: 0.2s;
 }
 
-
-
-.copy-code::after {
-	font-family: "Font Awesome 5 Free";
-	font-weight: 600;
-	font-size: 14px;
-	content: "\f328";
-	color: #fff;
-	position: absolute; 
-	top: 5px;
-	left: 8px;
+.copy-icon:is(:hover, :focus, :active){
+  opacity: 0.9;
 }
-.copy-code-wrap:active .copy-code {
+
+
+.copy-icon::after {
+  content: '⎘';
+	font-weight: 700;
+	font-size: 28px;
+	color: #000;
+	position: absolute; 
+	top: -6px;
+	left: 5px;
+}
+
+.copy-btn:active .copy-icon {
 	transform: translate(0, 0) scale(0.9);
 }
+
 .animate {
 	transform: translate(0, 0) scale(1.12);
 }
+

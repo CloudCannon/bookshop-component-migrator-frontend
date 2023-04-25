@@ -118,7 +118,9 @@
   const stringifyData = (data) => yaml.dump(data);
 
   const copyToClipBoard = (data) => {
-    navigator.clipboard.writeText(data);
+    if (!data) return
+    
+    navigator.clipboard.writeText(data); 
   }
 
   onMount(() => {
@@ -179,10 +181,10 @@
     <div class="box">
       <p class="label">Bookshop config</p>
       <button 
-        class="copy-code-wrap"
+        class="copy-btn"
         on:click={() => copyToClipBoard(stringifyData(rendered?.bookshop ))}
       >
-      <span class="copy-code"></span>
+      <span class="copy-icon"></span>
       </button>
       <Editor
         lang="yaml"
@@ -192,10 +194,10 @@
     <div class="box">
       <p class="label">Component HTML</p>
       <button 
-        class="copy-code-wrap"
-        on:click={() => copyToClipBoard(stringifyData(rendered?.component ))}
+        class="copy-btn"
+        on:click={() => copyToClipBoard(rendered?.component)}
       >
-      <span class="copy-code"></span>
+      <span class="copy-icon"></span>
       </button>
       <Editor
         lang="html"
@@ -205,10 +207,10 @@
     <div class="box">
       <p class="label">Data</p>
       <button 
-        class="copy-code-wrap"
+        class="copy-btn"
         on:click={() => copyToClipBoard(stringifyData(rendered?.data ))}
       >
-      <span class="copy-code"></span>
+      <span class="copy-icon"></span>
       </button>
       <Editor
         lang="yaml"
@@ -217,3 +219,5 @@
     </div>
   </div>
 </main>
+
+
