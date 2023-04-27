@@ -65,6 +65,8 @@ main {
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  position: relative;
+
 }
 
 @media (max-width: 800px) {
@@ -111,3 +113,59 @@ main {
   line-height: 1em;
   padding: 5px 0;
 }
+
+
+
+
+.copy-btn {
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    top: 0px;
+    right: 2px;
+    z-index: 10;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+
+.copy-btn:is(:hover, :focus, :active) {
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.copy-icon {
+	height: 26px;
+	width: 26px;
+	position: absolute;
+  top: 1px;
+  right: 1px;
+	transition: 0.2s;
+}
+
+.copy-icon:is(:hover, :focus, :active){
+  opacity: 0.9;
+}
+
+
+.copy-icon::after {
+  content: '⎘';
+	font-weight: 700;
+	font-size: 28px;
+	color: #000;
+	position: absolute; 
+	top: -6px;
+	left: 5px;
+}
+
+.copy-btn:active .copy-icon {
+	transform: translate(0, 0) scale(0.9);
+}
+
+.animate {
+	transform: translate(0, 0) scale(1.12);
+}
+

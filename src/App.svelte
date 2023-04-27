@@ -105,6 +105,8 @@
     return keyLookup;
   }
 
+  
+
   const rerunTemplateEngine = () => {
     const TemplateEngineClass = componentMigrator.templateEngines[selectedTemplateEngineName];
     const templateEngine = new TemplateEngineClass(inputLabel || parsed.id, parsed.component, parsed.data);
@@ -114,6 +116,12 @@
   }
 
   const stringifyData = (data) => yaml.dump(data);
+
+  const copyToClipBoard = (data) => {
+    if (!data) return
+    
+    navigator.clipboard.writeText(data); 
+  }
 
   onMount(() => {
     if (inputHtml) {
@@ -172,6 +180,12 @@
   <div class="row">
     <div class="box">
       <p class="label">Bookshop config</p>
+      <button 
+        class="copy-btn"
+        on:click={() => copyToClipBoard(stringifyData(rendered?.bookshop ))}
+      >
+      <span class="copy-icon"></span>
+      </button>
       <Editor
         lang="yaml"
         code={stringifyData(rendered?.bookshop || 'Pending...')}
@@ -179,6 +193,12 @@
     </div>
     <div class="box">
       <p class="label">Component HTML</p>
+      <button 
+        class="copy-btn"
+        on:click={() => copyToClipBoard(rendered?.component)}
+      >
+      <span class="copy-icon"></span>
+      </button>
       <Editor
         lang="html"
         code={rendered?.component || 'Pending...'}
@@ -186,6 +206,12 @@
     </div>
     <div class="box">
       <p class="label">Data</p>
+      <button 
+        class="copy-btn"
+        on:click={() => copyToClipBoard(stringifyData(rendered?.data ))}
+      >
+      <span class="copy-icon"></span>
+      </button>
       <Editor
         lang="yaml"
         code={stringifyData(rendered?.data || 'Pending...')}
@@ -193,3 +219,5 @@
     </div>
   </div>
 </main>
+
+
